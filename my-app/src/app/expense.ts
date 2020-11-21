@@ -3,6 +3,6 @@ export interface Expense {
     amount: number,
     info: [
         type: string, // all caps "NEED", OR "WANT"
-        
+        repeat: number // ever 'n' weeks 
     ]
 }

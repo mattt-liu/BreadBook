@@ -1,5 +1,7 @@
 body{
-    background-color:#a8dadc;
+    background-color: #a8dadc;
+    margin: 0;
+  font-family: Verdana, Arial, Tahoma, Serif;
   }
   
   ul {
@@ -7,19 +9,9 @@ body{
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #1d3557;
+ border: 0;
     }
     li {
       display: inline;
       float: left;
     }
-    
-    li a {
-    display: block;
-    padding: 8px;
-    background-color: #1d3557;
-    color:white;
-  }
-  li a:hover {
-    background-color: #a8dadc;
-  }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Expense } from '../expense';
+import { Income } from '../income';
 
 @Component({
   selector: 'app-profile',
@@ -8,13 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileComponent implements OnInit {
 
   // temp variables to be fetch from backend later
-  income: number[];
-  expenses: number[];
+  income: Income[];
+  expenses: Expense[];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  
+
 }
