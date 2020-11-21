@@ -1,1 +1,27 @@
-<p>profile works!</p>
+<h1>My Profile</h1>
+<button (click)="showIncomes()">Edit income sources</button>
+<div *ngIf="openIncomes">
+    <h2>Income</h2>
+    <ul *ngIf="incomes">
+        <li *ngFor="let i of incomes">
+            <div><h3>Name:</h3>
+                <input [(ngModel)]="i.name" type="text" placeholder="Name">
+            </div>
+            <div><h3>Amount:</h3>
+                $<input [(ngModel)]="i.amount" placeholder="123.45" type="number" min="0.00" step="0.01">
+            </div>
+        </li>
+    </ul>
+</div>
+<button (click)="showExpenses()">Edit expenses</button>
+<div *ngIf="openExpenses">
+    <h2>Expense</h2>
+    <ul *ngIf="expenses">
+        <li *ngFor="let i of expenses">
+            <h3>{{i.name}}</h3>
+            <div>
+                Spendings: ${{i.amount}} 
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-//import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import { NgModule } from "@angular/core";
+import { MatDialogModule } from '@angular/material/dialog';
+import { ExpenseComponent  } from '../expense/expense.component';
 
 @Component({
   selector: 'app-new-expense-dialog',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-expense-dialog.component.css']
 })
 export class NewExpenseDialogComponent implements OnInit {
+  expenseCategories = [];
 
-  constructor() { }
+  constructor() {}
 
+  createExpenseCategory(category: string){
+    this.expenseCategories.push(category);
+  }
   ngOnInit(): void {
   }
 

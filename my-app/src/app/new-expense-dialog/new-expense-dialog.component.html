@@ -1,17 +1,30 @@
-<p>Create A new Component here</p>
+<h2 mat-dialog-title>New Expense</h2>
 
-<mat-dialog-content [formGroup]="form">
-  
-    <mat-form-field>
-        <input matInput
-                placeholder="Course Description"
-               formControlName="description">
-    </mat-form-field>
-      ....
- 
+
+<mat-dialog-content> 
+  Expense Name<input type="text" id="createExpenseName">
+  Amount<input type="number" id="createExpenseName">
+  Repeats
+  <select>
+    <option>Daily</option>
+    <option>Weekly</option>
+    <option>Monthly</option>
+    <option>Yearly</option>
+  </select>
+
+  Category
+  <select>
+    <option *ngFor="let category of expenseCategories | keyvalue">{{ category.key }}</option>
+  </select>
+
+
+   
+      
 </mat-dialog-content>
-
+<!--
 <mat-dialog-actions>
     <button class="mat-raised-button"(click)="close()">Close</button>
     <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
 </mat-dialog-actions>
+-->
+<!--[formGroup]="form"-->

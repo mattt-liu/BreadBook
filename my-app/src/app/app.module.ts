@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
+
 //import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { Injectable } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,8 +29,8 @@ import { NewExpenseDialogComponent } from './new-expense-dialog/new-expense-dial
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
-    BrowserAnimationsModule
-    //MatDialog
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,17 +1,36 @@
 body{
-    background-color: #a8dadc;
-    margin: 0;
-  font-family: Verdana, Arial, Tahoma, Serif;
+    background-color:#a8dadc;
   }
   
   ul {
-    list-style-type: none;
+     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
- border: 0;
+    background-color: rgb(43, 43, 51);
     }
     li {
       display: inline;
       float: left;
     }
+    
+    li a {
+    display: block;
+    padding: 8px;
+    background-color: rgb(43, 43, 51);
+    padding: 15px;
+    color: white;
+  }
+  a:hover{
+background-color: #a8dadc;
+  }
+  .dashboard-item{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25px;
+    text-align:center;
+  }
+  .pie_chart_container{
+    border-radius: 25px;
+    background-color:#495867;
+  }

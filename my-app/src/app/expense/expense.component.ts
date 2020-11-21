@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import {MatDialogModule} from '@angular/material/dialog';
+
+// matdialog module
 import { NewExpenseDialogComponent } from '../new-expense-dialog/new-expense-dialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-expense',
@@ -10,7 +13,8 @@ import { NewExpenseDialogComponent } from '../new-expense-dialog/new-expense-dia
 export class ExpenseComponent implements OnInit {
   income = {}; // todo GET income on init
   expenses = {};  // todo GET expenses on init
-  columnHeaders = ["Name", "Amount "];
+  columnHeaders = ["Name", "Amount", "Repeats"];
+  expenseCategories = [];
 
   constructor(private dialog: MatDialog) { 
   }
@@ -24,10 +28,14 @@ export class ExpenseComponent implements OnInit {
     //dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    /* test properties */
+    // dialog properties; passed through open() method when dialog is opened
     dialogConfig.data = {
       id: 1,
-      title: 'Angular For Beginners'
+      title: 'Angular For Beginners',
+      disableClose: false,
+      autoFocus: true,
+      // height:
+      // width: 
     };
 
     this.dialog.open(NewExpenseDialogComponent, dialogConfig);
