@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { DashboardDisplayService } from '../dashboard-display.service';
 
-import { report } from 'process';
+//import { report } from 'process';
 import { Expense } from '../expense';
 import { Income } from '../income';
 
@@ -22,21 +22,40 @@ export class ProfileComponent implements OnInit {
   openIncomes: boolean = false;
   openExpenses: boolean = false;
 
+  types: string[] = ["year", "month", "week","day"];
+
   constructor(
     private dashService: DashboardDisplayService
     ) { }
 
   ngOnInit(): void {
-    this.incomes =  this.dashService.getExpenses();
+    this.getExpenses();
+    this.getIncome();
   }
 
-  incomeSummary() {
-
+  getIncome() {
+    this.incomes =  this.dashService.getIncome();
   }
+
+  getExpenses() {
+    this.expenses = this.dashService.getExpenses();
+  }
+
   showIncomes() {
     this.openIncomes = !this.openIncomes;
   }
   showExpenses() {
     this.openExpenses = !this.openExpenses;
+  }
+
+  saveExpenses() {
+    console.log(this.expenses);
+
+    this.dashService.updateExpenses(this.expenses);
+  }
+  saveIncome() {
+    console.log(this.incomes);
+
+    this.dashService.updateIncome(this.incomes);
   }
 }

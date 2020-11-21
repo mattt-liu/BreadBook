@@ -1,27 +1,51 @@
 <h1>My Profile</h1>
-<button (click)="showIncomes()">Edit income sources</button>
-<div *ngIf="openIncomes">
-    <h2>Income</h2>
-    <ul *ngIf="incomes">
-        <li *ngFor="let i of incomes">
-            <div><h3>Name:</h3>
-                <input [(ngModel)]="i.name" type="text" placeholder="Name">
-            </div>
-            <div><h3>Amount:</h3>
-                $<input [(ngModel)]="i.amount" placeholder="123.45" type="number" min="0.00" step="0.01">
-            </div>
-        </li>
-    </ul>
+<div>
+    <button (click)="showIncomes(); getIncome()">Edit income sources</button>
+    <div *ngIf="openIncomes">
+        <h2>Income</h2>
+        <ul *ngIf="incomes">
+            <li *ngFor="let i of incomes">
+                <div>Name:
+                    <input [(ngModel)]="i.name" type="text" placeholder="Name">
+                </div>
+                <div>Amount:
+                    $ <input [(ngModel)]="i.amount" placeholder="123.45" type="number" min="0.00" step="0.01">
+                </div>
+                <div>
+                    <span>Repeat every </span>
+                    <input [(ngModel)]="i.info.repeat">
+                    <select [(ngModel)]="i.info.type">
+                        <option *ngFor="let t of types" [value]="t">{{t}}</option>
+                    </select>
+                </div>
+            </li>
+        </ul>
+        <button>Add</button>
+        <button (click)="showIncomes(); saveIncome()">Save</button>
+    </div>
 </div>
-<button (click)="showExpenses()">Edit expenses</button>
-<div *ngIf="openExpenses">
-    <h2>Expense</h2>
-    <ul *ngIf="expenses">
-        <li *ngFor="let i of expenses">
-            <h3>{{i.name}}</h3>
-            <div>
-                Spendings: ${{i.amount}} 
-            </div>
-        </li>
-    </ul>
+<div>
+
+    <button (click)="showExpenses(); getExpenses()">Edit expenses</button>
+    <div *ngIf="openExpenses">
+        <h2>Expense</h2>
+        <ul *ngIf="expenses">
+            <li *ngFor="let i of expenses">
+                <div>Name:
+                    <input [(ngModel)]="i.name" type="text" placeholder="Name">
+                </div>
+                <div>Amount:
+                    $ <input [(ngModel)]="i.amount" placeholder="123.45" type="number" min="0.00" step="0.01">
+                </div>
+                <div>
+                    <span>Repeat every </span>
+                    <input [(ngModel)]="i.info.repeat">
+                    <select [(ngModel)]="i.info.type">
+                        <option *ngFor="let t of types" [value]="t">{{t}}</option>
+                    </select>
+                </div>
+            </li>
+        </ul>
+        <button (click)="showExpenses(); saveExpenses()">Save</button>
+    </div>
 </div>

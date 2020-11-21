@@ -13,12 +13,24 @@ export class DashboardDisplayService {
     {
       name: "Work",
       amount: 36284.38,
-      info: {type: "", repeat: 52}
+      info: {type: "year", repeat: 1}
     },
     {
       name: "Business",
       amount: 230.93,
-      info: {type: "", repeat: 1}
+      info: {type: "week", repeat: 1}
+    }
+  ];
+  expensesData: Expense[] = [
+    {
+      name: "Gym membership",
+      amount: 9.99,
+      info: {type: "week", repeat: 2}
+    },
+    {
+      name: "Netflix",
+      amount: 19.99,
+      info: {type: "month", repeat: 1}
     }
   ];
 
@@ -26,7 +38,7 @@ export class DashboardDisplayService {
 
   // expenses
   getExpenses(): Expense[] {
-    return [];
+    return this.expensesData;
   }
 
   getExpensesWeekly() {
@@ -51,5 +63,13 @@ export class DashboardDisplayService {
   }
   getIncomeYearly() {
     
+  }
+
+  updateIncome(data: Income[]) {
+    this.incomeData = data;
+  }
+
+  updateExpenses(data: Expense[]) {
+    this.expensesData = data;
   }
 }
