@@ -15,9 +15,12 @@ export class NewExpenseDialogComponent implements OnInit {
   enableNewExpense = false;
   enableEditExpense = false;
 
+  expenseBeingEdited = "";
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.enableNewExpense = data.enableNewExpense;
     this.enableEditExpense = data.enableEditExpense;
+    this.expenseBeingEdited = data.expenseBeingEdited;
   }
 
   createExpenseCategory(){

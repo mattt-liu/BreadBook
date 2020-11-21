@@ -85,6 +85,7 @@ export class ExpenseComponent implements OnInit {
     dialogConfig.data = {
       enableNewExpense: false,
       enablEditExpense: true,
+      expenseBeingEdited: expenseName,
     } // data (property) passed along with dialogConfig
 
     this.dialog.open(NewExpenseDialogComponent, dialogConfig);
