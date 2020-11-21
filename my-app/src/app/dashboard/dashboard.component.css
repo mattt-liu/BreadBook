@@ -1,0 +1,43 @@
+body{
+    background-color:#a8dadc;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(43, 43, 51);
+    }
+    li {
+      display: inline;
+      float: left;
+    }
+    
+    li a {
+    display: block;
+    padding: 8px;
+    background-color: rgb(43, 43, 51);
+    padding: 15px;
+    color: white;
+  }
+  a:hover{
+background-color: #a8dadc;
+  }
+  .dashboard-item{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25px;
+    text-align:center;
+    box-shadow: 1px 1px #5c4733;
+  }
+  .chart{
+    border-radius: 25px;
+  }
+  .dashboard-button{
+    border-radius: 10px;
+    border:none;
+    background-color: #A3BCF9;
+    color:white;
+    margin: 2px;
+  }

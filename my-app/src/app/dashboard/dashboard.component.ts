@@ -1,57 +1,114 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
+import { Label } from 'ng2-charts';
+import { DashboardDisplayService } from '../dashboard-display.service'
+
+import { Income } from '../income';
+import { Expense } from '../expense';
+
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { ChartType, ChartOptions } from 'chart.js';
+import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
-})
-export class DashboardComponent implements OnInit {
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
+  })
+  export class DashboardComponent implements OnInit {
 
-  constructor() { }
+    income: Income[];
+    expenses: Expense[];
 
-  ngOnInit(): void {
+    showIncomeView: boolean = false;
+    showExpensesView: boolean = true;
 
-  }
-  /*
-  graph() {
+    //chart drawing
+  public pieChartOptions: ChartOptions = {
+      responsive: true,
+      legend: {
+          position: 'top',
+      },
+      plugins: {
+          datalabels: {
+              formatter:(value, ctx) => {
+                  const label = ctx.chart.data.labels[ctx.dataIndex];
+                  return label;
+              },
+          },
+      },
+  };
+  
+  
+  public pieChartLabels: Label [] = [];
+  public pieChartData: number [] = [];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [pluginDataLabels];
+  public pieChartColors = [
+  {
+      backgroundColor: ['rgba(0,255,0,0.3)','rgba(0,0,255,0.3)','rgba(255,0,0,0.3)']
+  },
+  ];
+    constructor(
+        private dashboardService: DashboardDisplayService
+    ) { }
+  
+    ngOnInit(): void {
+        //this.showIncome("day");
+        //this.showExpenses("day");
+        this.update();
+    }
+  
+    //getting the layout for the income and expense**
+    update() {
+        this.income = this.dashboardService.getIncome();
+        this.expenses = this.dashboardService.getExpenses();
+    }
     
-    ctx = document.getElementById('chart').getContext('2d');
-    myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
+
+    //inputting the data for the two charts in which we want to inplement (Income and Expenses)
+    showIncome(type: string) {
+        this.update();
+
+        this.pieChartLabels = [];
+        this.pieChartData = [];
+
+        //push values of name and amount graph
+        for(let e of this.dashboardService.getIncomeType(type)) {
+
+            this.pieChartLabels.push(e.name); 
+            this.pieChartData.push(e.amount);
+            
         }
-    });
-  }*/
+    }
+
+    showExpenses(type: string) {
+        this.update();
+
+        this.pieChartLabels = [];
+        this.pieChartData = [];
+
+        //push values of name and amount graph
+        for(let e of this.dashboardService.getExpensesType(type)) {
+
+            this.pieChartLabels.push(e.name); 
+            this.pieChartData.push(e.amount);
+            
+        }
+    }
+    clickIncomeView() {
+        this.showExpensesView = false;
+        this.showIncomeView = true;
+        
+        this.showIncome("day");
+    }
+
+    clickExpensesView() {
+        this.showExpensesView = true;
+        this.showIncomeView = false;
+
+        this.showExpenses("day");
+    }
+
 }

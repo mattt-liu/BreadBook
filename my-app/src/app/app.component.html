@@ -5,23 +5,8 @@
   <li><a routerLink="/profile">Profile</a></li>
 </ul>
 
-
-<h1 style= "text-align:center; color:white;">
-Summary</h1>
-  
-  <div style="width: 80%; margin:auto;">
-          <div style="width: 300px; height: 300px;" class="pie_chart_container"> pi </div>
-          <div class = "dashboard-item" style="background-color:#ECC8AF">
-                STUFF HERE ABOUT THE PIE CHART
-                </div>
-                        <div style="background-color:#E7AD99" class = "dashboard-item">
-                STUFF HERE ABOUT THE PIE CHART
-                </div>
-                        <div style="background-color:#CE796B" class = "dashboard-item">
-                STUFF HERE ABOUT THE PIE CHART
-                </div>
-                        <div style="background-color: #C18C5D" class = "dashboard-item">
-                BOTTOM TEXT
-            </div>
-  </div>
-<router-outlet></router-outlet>
+<div class="background">
+        <div class="wrapper">
+                <router-outlet></router-outlet>
+        </div>
+</div>

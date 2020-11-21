@@ -28,7 +28,7 @@
 
     <button (click)="showExpenses(); getExpenses()">Edit expenses</button>
     <div *ngIf="openExpenses">
-        <h2>Expense</h2>
+        <h2>Expenses</h2>
         <ul *ngIf="expenses">
             <li *ngFor="let i of expenses">
                 <div>Name:

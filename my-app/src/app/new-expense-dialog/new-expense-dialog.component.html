@@ -1,12 +1,11 @@
-<h2 mat-dialog-title>New Expense</h2>
-
 
 <mat-dialog-content> 
   <div *ngIf="enableNewExpense">
-    Expense Name<input type="text" id="createExpenseName">
-    Amount<input type="number" id="createExpenseName">
+    <h2 mat-dialog-title>New Expense</h2>
+    Expense Name<input type="text" [(ngModel)]='expenseBeingEdited.name'>
+    Amount<input type="number" [(ngModel)]='expenseBeingEdited.amount'>
     Repeats
-    <select>
+    <select [(ngModel)]="expenseBeingEdited.repeats">
       <option>Daily</option>
       <option>Weekly</option>
       <option>Monthly</option>
@@ -14,22 +13,23 @@
     </select>
 
     Category
-    <select>
+    <select [(ngModel)]="expenseBeingEdited.category">
       <option *ngFor="let category of expenseCategories ">{{ category }}</option>
     </select>
     <button (click)="showCreateExpenseCategorySection()">New Expense Category</button>
     
-    <input *ngIf="enableCategorySection" type="text" id="createCategoryName">
+    <input *ngIf="enableCategorySection" type="text" [(ngModel)]="createdCategoryName">
     <button *ngIf="enableCategorySection" (click)="createExpenseCategory()">Create Category</button>
 
     <button (click)="createExpense()">Create Expense</button>
   </div>
 
   <div *ngIf="enableEditExpense">
-    Edit {{ expenseBeingEdited }} <input type="text" id="createExpenseName">
-    Amount<input type="number" id="createExpenseName">
+    Edit {{ expenseBeingEdited.name }}
+    <input type="text" value="expenseBeingEdited.name" [(ngModel)]="expenseBeingEdited.name"> -->
+    Amount<input type="number" id="editExpenseAmount" [(ngModel)]="expenseBeingEdited.amount">
     Repeats
-    <select>
+    <select id="editExpenseRepeats" [(ngModel)]="expenseBeingEdited.repeats">
       <option>Daily</option>
       <option>Weekly</option>
       <option>Monthly</option>
@@ -37,15 +37,15 @@
     </select>
 
     Category
-    <select>
+    <select [(ngModel)]="expenseBeingEdited.category" id="editExpeneCategory">
       <option *ngFor="let category of expenseCategories ">{{ category }}</option>
     </select>
     <button (click)="showCreateExpenseCategorySection()">New Expense Category</button>
     
-    <input *ngIf="enableCategorySection" type="text" id="createCategoryName">
+    <input *ngIf="enableCategorySection" type="text" [(ngModel)]="createdCategoryName">
     <button *ngIf="enableCategorySection" (click)="createExpenseCategory()">Create Category</button>
 
-    <button (click)="createExpense()">Create Expense</button>
+    <button (click)="saveEditExpense()">Save Expense</button>
   </div>
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // matdialog module
 import { NewExpenseDialogComponent } from '../new-expense-dialog/new-expense-dialog.component';
@@ -11,21 +11,30 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   styleUrls: ['./expense.component.css']
 })
 export class ExpenseComponent implements OnInit {
-  income = {}; // todo GET income on init
+  income = []; // todo GET income on init
   expenses = [// todo GET expenses on init
-    { name: "pHubPremium",
+    { 
+      name: "pHubPremium",
       amount: 10,
       repeats: "monthly",
-      type: "subscription"      
+      category: "subscription"      
     }
   ];  
+  balance;
   showDeletePrompt = false;
 
   incomeDetails = [];
-  expenseDetails = ["name", "amount", "repeats", "type"];
-  expenseCategories = [];
+  expenseDetails = ["name", "amount", "repeats", "category"];
+  expenseCategories;
+
+  // returned objects from dialog component after the user edits or creates an expense
+  changedExpenseResult;
+  savedExpenseResult;
+  //categories; // categories array if user creates new categories
 
   constructor(private dialog: MatDialog) { 
+    this.balance = 100.0;
+    this.expenseCategories = ["category1"];
   }
 
   ngOnInit(): void {
@@ -38,21 +47,30 @@ export class ExpenseComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     // dialog properties; passed through open() method when dialog is opened
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners',
-      disableClose: false,
-      autoFocus: true,
-      // height:
-      width: 5
-    };
+      dialogConfig.data = {
+        id: 1,
+        title: 'Angular For Beginners',
+        disableClose: false,
+        autoFocus: true,
+        // height:
+        width: 5
+      };
 
-    dialogConfig.data = {
-      enableNewExpense: true,
-      enablEditExpense: false,
-    }
+    // dialog options. Data passed in so dialog will be formatted properly
+      dialogConfig.data = {
+        enableNewExpense: true,
+        enableEditExpense: false,
+        expenseCategories: this.expenseCategories,
+      }
 
-    this.dialog.open(NewExpenseDialogComponent, dialogConfig);
+    // opening the dialog and passing in the dialog options
+    let dialogRef = this.dialog.open(NewExpenseDialogComponent, dialogConfig);
+
+    // callback for data recieved from dialog after closing. It will pass the created expense object and the (potentially edited) categories list
+    dialogRef.afterClosed().subscribe(result => {
+      this.expenseCategories = result.expenseCategories;
+      this.expenses.push(result.createdExpense);
+    });
   }
 
   newIncome(){
@@ -65,7 +83,7 @@ export class ExpenseComponent implements OnInit {
 
     // find expense in expense array with matching name 
     for(let exp of this.expenses){
-      if(exp.name == expense){
+      if(exp.name == expenseName){
         expense = exp;
       }
     }
@@ -84,11 +102,35 @@ export class ExpenseComponent implements OnInit {
 
     dialogConfig.data = {
       enableNewExpense: false,
-      enablEditExpense: true,
-      expenseBeingEdited: expenseName,
+      enableEditExpense: true,
+      expenseBeingEdited: expense,
+      expenseCategories: this.expenseCategories,
     } // data (property) passed along with dialogConfig
 
-    this.dialog.open(NewExpenseDialogComponent, dialogConfig);
+    // opening the dialog and passing in the dialog options
+    const dialogRef = this.dialog.open(NewExpenseDialogComponent, dialogConfig);
+
+    // callback for data recieved from dialog after closing. It will pass the edited expense object and the (potentially edited) categories list
+    dialogRef.afterClosed().subscribe(result => {
+      this.changedExpenseResult = result.expenseBeingEdited;
+      this.expenseCategories = result.expenseCategories;
+      this.saveEditExpense(result, expense.name);
+      console.log(result);
+    });
+  }
+
+  saveEditExpense(result: any, expenseName: string){
+    let editedExpense = result.expenseBeingEdited;
+    this.expenseCategories = result.expenseCategories;
+
+    for(let expense of this.expenses){
+      if(expense.name == expenseName){
+        expense.name = editedExpense.name;
+        expense.amount = editedExpense.amount;
+        expense.category = editedExpense.category;
+        expense.repeats = editedExpense.repeats;
+      }
+    }
   }
 
   promptDeleteExpense(){

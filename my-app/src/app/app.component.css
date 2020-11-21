@@ -1,6 +1,12 @@
-body{
+.background{
     background-color:#a8dadc;
+    height: 100%;
   }
+.wrapper
+{
+  margin: 0 auto;
+  width: 80%;
+}
   
   ul {
      list-style-type: none;
@@ -21,17 +27,6 @@ body{
     padding: 15px;
     color: white;
   }
-  a:hover{
+  li a:hover{
 background-color: #a8dadc;
-  }
-  .dashboard-item{
-    margin: 10px;
-    padding: 10px;
-    border-radius: 25px;
-    text-align:center;
-    box-shadow: 1px 1px #5c4733;
-  }
-  .pie_chart_container{
-    border-radius: 25px;
-    background-color:#495867;
   }

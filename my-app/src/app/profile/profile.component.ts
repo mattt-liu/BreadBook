@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   openIncomes: boolean = false;
   openExpenses: boolean = false;
 
-  types: string[] = ["year", "month", "week","day"];
+  types: string[];
 
   constructor(
     private dashService: DashboardDisplayService
@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getExpenses();
     this.getIncome();
+    this.getTypes();
   }
 
   getIncome() {
@@ -57,5 +58,9 @@ export class ProfileComponent implements OnInit {
     console.log(this.incomes);
 
     this.dashService.updateIncome(this.incomes);
+  }
+
+  getTypes() {
+    this.types = this.dashService.getTypes();
   }
 }
