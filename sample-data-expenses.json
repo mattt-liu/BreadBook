@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Gym membership",
+    "amount": "9.99",
+    "info": {"type": "week", "repeat": "2"}
+  },
+  {
+    "name": "Netflix",
+    "amount": "19.99",
+    "info": {"type": "month", "repeat": "1"}
+  }
+]

@@ -1,0 +1,11 @@
+.expenseTable{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    border: 1px solid black;    
+}
+
+.expenseTableHeaderRow{
+    background-color: lightgrey;
+}

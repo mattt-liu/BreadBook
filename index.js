@@ -2,6 +2,10 @@ const { json } = require("express");
 const express = require("express");
 const Joi = require("joi");
 
+// sample data
+const expenses = require('./sample-data-expenses.json'); 
+const income = require('./sample-data-income.json')
+
 // ---- init
 const app = express();
 const port = 3000;
@@ -21,9 +25,14 @@ app.use((req, res, next) => {
     next();
 });
 
-router.route('/')
+router.route('/expenses')
     .get((req, res) => {
-        res.send(JSON.stringify());
+        res.send(JSON.stringify(expenses));
+    });
+
+router.route('/income')
+    .get((req, res) => {
+        res.send(JSON.stringify(income));
     });
 
 app.use('/api', router);

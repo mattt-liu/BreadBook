@@ -2,29 +2,53 @@
 
 
 <mat-dialog-content> 
-  Expense Name<input type="text" id="createExpenseName">
-  Amount<input type="number" id="createExpenseName">
-  Repeats
-  <select>
-    <option>Daily</option>
-    <option>Weekly</option>
-    <option>Monthly</option>
-    <option>Yearly</option>
-  </select>
+  <div *ngIf="enableNewExpense">
+    Expense Name<input type="text" id="createExpenseName">
+    Amount<input type="number" id="createExpenseName">
+    Repeats
+    <select>
+      <option>Daily</option>
+      <option>Weekly</option>
+      <option>Monthly</option>
+      <option>Yearly</option>
+    </select>
 
-  Category
-  <select>
-    <option *ngFor="let category of expenseCategories | keyvalue">{{ category.key }}</option>
-  </select>
+    Category
+    <select>
+      <option *ngFor="let category of expenseCategories ">{{ category }}</option>
+    </select>
+    <button (click)="showCreateExpenseCategorySection()">New Expense Category</button>
+    
+    <input *ngIf="enableCategorySection" type="text" id="createCategoryName">
+    <button *ngIf="enableCategorySection" (click)="createExpenseCategory()">Create Category</button>
+
+    <button (click)="createExpense()">Create Expense</button>
+  </div>
+
+  <div *ngIf="enableEditExpense">
+    Expense Name<input type="text" id="createExpenseName">
+    Amount<input type="number" id="createExpenseName">
+    Repeats
+    <select>
+      <option>Daily</option>
+      <option>Weekly</option>
+      <option>Monthly</option>
+      <option>Yearly</option>
+    </select>
+
+    Category
+    <select>
+      <option *ngFor="let category of expenseCategories ">{{ category }}</option>
+    </select>
+    <button (click)="showCreateExpenseCategorySection()">New Expense Category</button>
+    
+    <input *ngIf="enableCategorySection" type="text" id="createCategoryName">
+    <button *ngIf="enableCategorySection" (click)="createExpenseCategory()">Create Category</button>
+
+    <button (click)="createExpense()">Create Expense</button>
+  </div>
 
 
    
       
 </mat-dialog-content>
-<!--
-<mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
-</mat-dialog-actions>
--->
-<!--[formGroup]="form"-->

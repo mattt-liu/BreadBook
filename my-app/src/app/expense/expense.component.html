@@ -10,18 +10,31 @@
 <!-- todo: sort expenses by category -->
 
 <!-- Left Table Column: Expenses -->
-<table>
+<h2>Expenses </h2>
+<table class="expenseTable">
 
     <!-- Header Row (Labels) -->
     <tr>
-        <td *ngFor="let column of columnHeaders">
+        <td *ngFor="let column of expenseDetails" class="expenseTableHeaderRow">
             {{ column }}
         </td>
+
+        <!-- Empty Table Rows -->
+        <td class="expenseTableHeaderRow"></td>
+        <td class="expenseTableHeaderRow"></td>
     </tr>
 
-    <!-- Expense Data Rows -->
-    <tr *ngFor="let expense of expenses">
-        <td *ngFor="let detail"></td>
+     <!-- Expense Data Rows -->
+     <tr *ngFor="let expense of expenses">
+        <td *ngFor="let detail of expenseDetails">
+            {{ expense[detail] }}
+        </td>
+
+        <!-- Buttons at end of each expense row -->
+        <td><button (click)="editExpense(expense.name)">Edit</button>
+        <button (click)="promptDeleteExpense()">Delete</button>
+            <div *ngIf="showDeletePrompt" text-color="red" > Are you sure?</div> 
+            <button *ngIf="showDeletePrompt" (click)="deleteExpense(expense.name)">Delete</button></td> 
     </tr>
 
 </table>
@@ -31,18 +44,11 @@
 <table>
 
     <!-- Header Row (Labels) -->
-    <tr>
+    <!--<tr>
         <td *ngFor="let column of columnHeaders">
             {{ column }}
         </td>
-    </tr>
+    </tr>-->
 
-    <!-- Expense Data Rows -->
-    <tr *ngFor="let expense of expenses">
-        <td *ngFor="let detail"></td>
-
-        <td><button>Edit</button></td>
-        <td><button>Delete</button></td> 
-    </tr>
-
+   
 </table>

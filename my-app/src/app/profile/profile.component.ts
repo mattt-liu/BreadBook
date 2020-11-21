@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { DashboardDisplayService } from '../dashboard-display.service';
+
 import { report } from 'process';
 import { Expense } from '../expense';
 import { Income } from '../income';
@@ -9,32 +11,23 @@ import { Income } from '../income';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
 
-  // temp variables to be fetch from backend later
-  incomeData: Income[] = [
-    {
-      name: "Work",
-      amount: 36284.38,
-      info: {type: "", repeat: 52}
-    },
-    {
-      name: "Business",
-      amount: 230.93,
-      info: {type: "", repeat: 1}
-    }
-  ];
 
   // ---------------
-  @Input() incomes: Income[] = this.incomeData;
+  @Input() incomes: Income[];
   @Input() expenses: Expense[];
 
   openIncomes: boolean = false;
   openExpenses: boolean = false;
 
-  constructor() { }
+  constructor(
+    private dashService: DashboardDisplayService
+    ) { }
 
   ngOnInit(): void {
+    this.incomes =  this.dashService.getExpenses();
   }
 
   incomeSummary() {
