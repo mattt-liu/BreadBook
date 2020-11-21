@@ -1,0 +1,48 @@
+
+<p>Income and Expenses Component!</p>
+
+
+<button (click)="newExpense()" >New Expense</button>
+<button (click)="newIncome()">New Income</button>
+
+<!-- todo: total monthly expenses -->
+<!-- todo: total monthly income -->
+<!-- todo: sort expenses by category -->
+
+<!-- Left Table Column: Expenses -->
+<table>
+
+    <!-- Header Row (Labels) -->
+    <tr>
+        <td *ngFor="let column of columnHeaders">
+            {{ column }}
+        </td>
+    </tr>
+
+    <!-- Expense Data Rows -->
+    <tr *ngFor="let expense of expenses">
+        <td *ngFor="let detail"></td>
+    </tr>
+
+</table>
+
+
+<!-- Right Table Column: Income -->
+<table>
+
+    <!-- Header Row (Labels) -->
+    <tr>
+        <td *ngFor="let column of columnHeaders">
+            {{ column }}
+        </td>
+    </tr>
+
+    <!-- Expense Data Rows -->
+    <tr *ngFor="let expense of expenses">
+        <td *ngFor="let detail"></td>
+
+        <td><button>Edit</button></td>
+        <td><button>Delete</button></td> 
+    </tr>
+
+</table>

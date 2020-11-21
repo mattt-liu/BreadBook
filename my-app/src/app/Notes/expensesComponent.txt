@@ -1,0 +1,18 @@
+
+Functionalities:
+    - add expense with the following properties:
+        name
+        amount
+        repeat time / date
+        type?
+    
+    - add income with the following properties:
+        name
+        amount
+        repeat time / date
+        type?
+
+
+
+
+UI / Expense and Income Visualization

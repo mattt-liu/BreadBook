@@ -1,0 +1,6 @@
+write a function that takes in an array of prices and generates a piechart according to the different percentages
+
+ex: 
+input: [5.00, 2.50]
+
+output: 
