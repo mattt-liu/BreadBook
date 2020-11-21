@@ -1,0 +1,25 @@
+{
+  "name": "hackwestern7-finance-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattt-liu/hackwestern7-finance-app.git"
+  },
+  "author": "Matthew Liu, Jared Jasinski, Marcus Del Vecchio, Stephen Idugboe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattt-liu/hackwestern7-finance-app/issues"
+  },
+  "homepage": "https://github.com/mattt-liu/hackwestern7-finance-app#readme",
+  "dependencies": {
+    "@angular/cli": "^11.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node": "^15.2.1"
+  }
+}
