@@ -20,10 +20,15 @@ nav>ul {
 
 nav>ul>li {
   display: inline;
+  
   float: left;
+  width: 180px;
 }
 
-nav>ul>li a {
+nav>ul>li>a {
+  width: 100%;
+  font-size: 26px;
+  text-align: center;
   display: block;
   padding: 8px;
   background-color: rgb(43, 43, 51);
@@ -31,7 +36,7 @@ nav>ul>li a {
   color: white;
 }
 
-nav>ul>li a:active {
+nav>ul>li>a:active {
   background-color: #3D5A80;
 }
 
