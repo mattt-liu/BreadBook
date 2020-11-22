@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
 
 //import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -27,12 +28,13 @@ import { NewExpenseDialogComponent } from './new-expense-dialog/new-expense-dial
     NewExpenseDialogComponent
   ],
   imports: [
-    FormsModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     ChartsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

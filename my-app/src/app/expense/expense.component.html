@@ -17,27 +17,41 @@
 <table class="expenseTable">
 
     <!-- Header Row (Labels) -->
-    <tr>
+    <tr class="expenseTableTd" >
         <td *ngFor="let column of expenseDetails" class="expenseTableHeaderRow">
             {{ column }}
         </td>
 
         <!-- Empty Table Rows -->
         <td class="expenseTableHeaderRow"></td>
-        <td class="expenseTableHeaderRow"></td>
     </tr>
 
-     <!-- Expense Data Rows -->
-     <tr *ngFor="let expense of expenses">
-        <td *ngFor="let detail of expenseDetails">
-            {{ expense[detail] }}
-        </td>
+    <!-- Income Table Rows - Always at Top -->
+    <tr *ngFor="let income of incomes" class="incomeTableTr">
+        <td>{{income.name}}</td>
+        <td>{{income.amount}}</td>
+        <td>{{income.info.type}}</td>
+        <td>{{income.info.category}}</td>
 
         <!-- Buttons at end of each expense row -->
-        <td><button (click)="editExpense(expense.name)">Edit</button>
-        <button (click)="promptDeleteExpense()">Delete</button>
-            <div *ngIf="showDeletePrompt" text-color="red" > Are you sure?</div> 
-            <button *ngIf="showDeletePrompt" (click)="deleteExpense(expense.name)">Delete</button></td> 
+        <td><button (click)="editExpense(income.name, true)">Edit</button>
+        <button (click)="promptDeleteExpense(income.name)">Delete</button>
+            <div *ngIf="showDeletePrompt && income.name == expenseBeingDeleted"> Are you sure?</div> 
+            <button *ngIf="showDeletePrompt && income.name == expenseBeingDeleted" (click)="deleteExpense(income.name)">Delete</button></td> 
+    </tr>
+
+    <!-- Expense Data Rows -->
+    <tr *ngFor="let expense of expenses" class="expenseTableTr">
+        <td>{{expense.name}}</td>
+        <td>{{expense.amount}}</td>
+        <td>{{expense.info.type}}</td>
+        <td>{{expense.info.category}}</td>
+
+        <!-- Buttons at end of each expense row -->
+        <td><button (click)="editExpense(expense.name, false)">Edit</button>
+        <button (click)="promptDeleteExpense(expense.name)">Delete</button>
+            <div *ngIf="showDeletePrompt && expense.name == expenseBeingDeleted"> Are you sure?</div> 
+            <button *ngIf="showDeletePrompt && expense.name == expenseBeingDeleted" (click)="deleteExpense(expense.name)">Delete</button></td> 
     </tr>
 
 </table>

@@ -6,7 +6,7 @@ import { Income } from '../income';
 import { Expense } from '../expense';
 
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Chart, ChartType, ChartOptions } from 'chart.js';
+import { Chart, ChartType, ChartOptions,  } from 'chart.js';
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 
 
@@ -17,8 +17,8 @@ import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/u
   })
   export class DashboardComponent implements OnInit {
 
-    income: Income[];
-    expenses: Expense[];
+    private income: Income[];
+    private expenses: Expense[];
 
     showIncomeView: boolean = false;
     showExpensesView: boolean = true;
@@ -42,6 +42,7 @@ import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/u
     public pieChartData: number [] = [];
     public pieChartType: ChartType = 'pie';
     public pieChartLegend = true;
+    //public pieChartRadius: 10000;
     public pieChartPlugins = [pluginDataLabels];
     public pieChartColors = [
     {

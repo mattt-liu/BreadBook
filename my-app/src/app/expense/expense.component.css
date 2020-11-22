@@ -6,6 +6,21 @@
     border: 1px solid black;    
 }
 
+.expenseTableTr{
+    background-color: #F08080;
+    border: 1px solid black;
+    border-collapse: collapse;    
+    width: 100%;
+}
+
+.incomeTableTr{
+    background-color: #F5DEB3;
+    border: 1px solid black;
+    border-collapse: collapse;    
+    width: 100%;
+}
+
+
 .expenseTableHeaderRow{
     background-color: lightgrey;
 }

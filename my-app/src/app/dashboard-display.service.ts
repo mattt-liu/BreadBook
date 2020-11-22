@@ -5,13 +5,22 @@ import { Expense } from './expense';
 import { templateJitUrl } from '@angular/compiler';
 import { number } from 'joi';
 
+
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardDisplayService {
 
+  url = "localhost:3000/api";
+
+
   // temp data
-  incomeData: Income[] = [
+  private testData: Income[];
+  private incomeData: Income[] = [
     {
       name: "Work",
       amount: 53284.38,
@@ -29,7 +38,7 @@ export class DashboardDisplayService {
     }
   ];
   
-  expensesData: Expense[] = [
+  private expensesData: Expense[] = [
     {
       name: "Utilities",
       amount: 133.56,
@@ -65,9 +74,13 @@ export class DashboardDisplayService {
   types: string[] = ["year", "month", "week","day","other"];
   typesVal: number[] = [365, 30, 7, 1];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   // expenses
+  getHttpExpenses() {
+    
+  }
+
   getExpenses(): Expense[] {
     // get all expenses
 
@@ -149,17 +162,92 @@ export class DashboardDisplayService {
   }
 
   // update
-  updateIncome(data) {
+  updateIncome(data: Income[]) {
+    for (let i = 0; i < data.length; i ++) {
+      let t = data[i].info.type.toLowerCase();
+
+      // skip it if 't' is in the existing format
+      if (this.types.find(e => e === t))
+        continue
+
+      // format
+      switch(t) {
+        case "yearly":
+          data[i].info.type = "year"
+          break
+        case "monthly":
+          data[i].info.type = "month"
+          break
+        case "weekly":
+          data[i].info.type = "week"
+          break
+        case "daily":
+          data[i].info.type = "day"
+          break
+        default:
+          data[i].info.type = "other";
+      }
+    }
+
     this.incomeData.concat(data);
   }
 
-  updateExpenses(data) {
+  updateExpenses(data: Expense[]) {
+
+    for (let i = 0; i < data.length; i ++) {
+      let t = data[i].info.type.toLowerCase();
+
+      // skip it if 't' is in the existing format
+      if (this.types.find(e => e === t))
+        continue
+
+      // format
+      switch(t) {
+        case "yearly":
+          data[i].info.type = "year"
+          break
+        case "monthly":
+          data[i].info.type = "month"
+          break
+        case "weekly":
+          data[i].info.type = "week"
+          break
+        case "daily":
+          data[i].info.type = "day"
+          break
+        default:
+          data[i].info.type = "other";
+      }
+    }
+
+    
     this.expensesData.concat(data);
   }
 
-  
 
-  // 
+  // delete
+  deleteExpense(name: string) {
+    
+    for(let i = 0; i < this.expensesData.length; i ++){
+      let exp = this.expensesData[i];
+      if(exp.name === name){
+        this.expensesData.splice(i, 1);
+        break;
+      }
+    }
+  }
+  deleteIncome(name: string) {
+    
+    for(let i = 0; i < this.incomeData.length; i ++){
+      let exp = this.incomeData[i];
+      if(exp.name === name){
+        this.incomeData.splice(i, 1);
+        break;
+      }
+    }
+  }
+
+  // ----------------------
 
   getTypes() {
     return this.types;

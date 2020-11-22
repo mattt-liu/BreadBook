@@ -21,11 +21,14 @@ export class ExpenseComponent implements OnInit {
   incomes: Income[] = []; // todo GET income on init
   expenses: Expense[] = [];
   balance;
+
   showDeletePrompt = false;
+  expenseBeingDeleted = "";
 
   incomeDetails = [];
-  expenseDetails = ["name", "amount", "repeats", "category"];
+  expenseDetails = ["Name", "Amount", "Repeats", "Category"];
   expenseCategories;
+  incomeCategories;
 
   // returned objects from dialog component after the user edits or creates an expense
   changedExpenseResult;
@@ -37,16 +40,11 @@ export class ExpenseComponent implements OnInit {
     ) { 
     this.balance = 100.0;
     this.expenseCategories = ["Bills", "Groceries", "Shopping", "Entertainment", "Dining Out"];
-  }
-
-  ngOnInit(): void {
-    this.expenses = this.dashService.getExpenses();
-    this.incomes = this.dashService.getIncome();
+    this.incomeCategories = ["Work", "Tax Returns", "Money Transfers"];
   }
 
   newExpense(income: boolean){
     var isIncome = income;
-
     let dialogConfig = new MatDialogConfig();
 
     //dialogConfig.disableClose = true;
@@ -62,76 +60,131 @@ export class ExpenseComponent implements OnInit {
         width: "700px"
       };
 
+    // assigning category object to type of categories to pass in (income or expense categories)
+
+      let categories;
+
+      if(isIncome){
+        categories = this.incomeCategories;
+      }
+      else{
+        categories = this.expenseCategories;
+      }
+
     // dialog options. Data passed in so dialog will be formatted properly
+      
       dialogConfig.data = {
         enableNewExpense: true,
         enableEditExpense: false,
-        expenseCategories: this.expenseCategories,
+        expenseCategories: categories,
         isIncome: isIncome, // telling dialog whether its an income or expense so it can be formatted accordingly
       }
 
     // opening the dialog and passing in the dialog options
-    let dialogRef = this.dialog.open(NewExpenseDialogComponent, dialogConfig);
+      let dialogRef = this.dialog.open(NewExpenseDialogComponent, dialogConfig);
 
-    // callback for data recieved from dialog after closing. It will pass the created expense object and the (potentially edited) categories list
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.expenseCategories = result.expenseCategories;
-
-      // calling method to create the new income or expense (based on passed in parameter to this method)
-      this.addExpenseOrIncome(result, isIncome);
-    });
+    // observable callback for data recieved from dialog after closing. It will pass the created expense object and the (potentially edited) categories list
+      dialogRef.afterClosed().subscribe(result => {
+      
+        if(result){ // if they don't close the window (this result object property will be defined)
+          // calling method to create the new income or expense (based on passed in parameter to this method)
+          this.addExpenseOrIncome(result, isIncome);
+        }
+        else{
+          console.log("Add income/expense window closed");
+        }
+        
+        // update service
+        this.dashService.updateExpenses(result);
+      });
   }
 
   addExpenseOrIncome(result: any, isIncome){
-
+    console.log(result);
     // if the expense being added isn't income
       if(!isIncome){
+        this.expenseCategories = result.expenseCategories;
         this.expenses.push(result.createdExpense);
       }
     
     // if the expense being added is income
       else{
+        this.incomeCategories = result.expenseCategories;
         this.incomes.push(result.createdExpense);
       }
   }
 
-  editExpense(expenseName: string){
+  // edit expense OR INCOME (if isIncome set to true)
+  editExpense(expenseName: string, isIncome: boolean){
     let expense;
     let dialogConfig = new MatDialogConfig();
 
-    // find expense in expense array with matching name 
-      for(let exp of this.expenses){
-        if(exp.name == expenseName){
-          expense = exp;
+    if(isIncome){
+
+        // find income in income array with matching name 
+        for(let inc of this.incomes){
+          if(inc.name == expenseName){
+            expense = inc;
+          }
         }
+    }else{
+
+      // find expense in expense array with matching name 
+        for(let exp of this.expenses){
+          if(exp.name == expenseName){
+            expense = exp;
+          }
+        }
+    }
+
+    // dialog properties, passed through open() method when dialog is opened
+      dialogConfig = {  // other properties: "id", "title", "height"
+        disableClose: false,
+        autoFocus: true,
+        width: '330px',
+      };
+
+    // assigning category object to type of categories to pass in (income or expense categories)
+
+      let categories;
+
+      if(isIncome){
+        categories = this.incomeCategories;
+      }
+      else{
+        categories = this.expenseCategories;
       }
 
-    dialogConfig.autoFocus = true;
+    // dialog properties additional data 
 
-    // dialog properties; passed through open() method when dialog is opened
-    dialogConfig = {
-      //id: 1,
-      //title: 'Angular For Beginners',
-      disableClose: false,
-      autoFocus: true,
-      // height:
-      width: '330px',
-    };
-
-    dialogConfig.data = {
-      enableNewExpense: false,
-      enableEditExpense: true,
-      expenseBeingEdited: expense,
-      expenseCategories: this.expenseCategories,
-    } // data (property) passed along with dialogConfig
+    console.log(expense);
+      dialogConfig.data = {
+        enableNewExpense: false,
+        enableEditExpense: true,
+        expenseBeingEdited: expense, // could also be an income object (if isIncome is true)
+        expenseCategories: categories,
+      } 
 
     // opening the dialog and passing in the dialog options
-    const dialogRef = this.dialog.open(NewExpenseDialogComponent, dialogConfig);
+      const dialogRef = this.dialog.open(NewExpenseDialogComponent, dialogConfig);
 
     // callback for data recieved from dialog after closing. It will pass the edited expense object and the (potentially edited) categories list
       
       dialogRef.afterClosed().subscribe(result => {
+
+        /* TODO IMPLIMENT THIS FOR EDIT (SEE CREATE)
+        if(result){ // if they don't close the window (this result object property will be defined)
+          // calling method to create the new income or expense (based on passed in parameter to this method)
+          this.addExpenseOrIncome(result, isIncome);
+        }
+        else{
+          console.log("Add income/expense window closed");
+        }
+        
+        // update service
+        this.dashService.updateExpenses(result);   
+        */
+       
         this.changedExpenseResult = result.expenseBeingEdited;
         this.expenseCategories = result.expenseCategories;
         this.saveEditExpense(result, expense.name);
@@ -154,9 +207,9 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
-  promptDeleteExpense(){
+  promptDeleteExpense(expenseName: string){
     this.showDeletePrompt = true;
-
+    this.expenseBeingDeleted = expenseName;
     // todo impliment setTimeout functionality so that delete prompt disappears after certain time?
     //setTimeout(10000);
     //this.showDeletePrompt = false;
@@ -164,16 +217,19 @@ export class ExpenseComponent implements OnInit {
 
   deleteExpense(expense: string){
     this.showDeletePrompt = false;
-    for(let exp of this.expenses){
-      if(exp.name == expense){
 
-        // remove expense and shift array
-        const index = this.expenses.indexOf(exp, 0);
-            if (index > -1) {
-              this.expenses.splice(index, 1);
-            }
-      }
-    }
+    // tell service to delete expense
+    this.dashService.deleteExpense(expense);
+    this.update();
+  }
+
+  update() {
+    this.expenses = this.dashService.getExpenses();
+    this.incomes = this.dashService.getIncome();
+  }
+
+  ngOnInit(): void {
+    this.update();
   }
 
 }

@@ -4,6 +4,7 @@ import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/materia
 import { ExpenseComponent  } from '../expense/expense.component';
 import { Expense } from '../expense';
 import { Income } from '../income';
+//import { createDecipher } from 'crypto';
 
 @Component({
   selector: 'app-new-expense-dialog',
@@ -19,6 +20,7 @@ export class NewExpenseDialogComponent implements OnInit {
     enableNewExpense = false;
     enableEditExpense = false;
     isIncome = false; // whether they are creating/ editing an income (false if an expense)
+    incomeOrExpense: string;
 
   // if dialog is opened to edit an expense, an object will be pased and we will set this member to that object to populate the inputs for editing
   expenseBeingEdited: Expense = {
@@ -59,14 +61,20 @@ export class NewExpenseDialogComponent implements OnInit {
         this.expenseBeingEdited = data.expenseBeingEdited; 
       }
 
-    console.log(data);
+    // set according 'incomeOrExpense' string based on whether it is an income or expense (string is used in HTML)
+      if(data.isIncome){
+        this.incomeOrExpense = "Income";
+      }
+      else{
+        this.incomeOrExpense = "Expense";
+      }
   }
 
   createExpenseCategory(){
     let category = this.createdCategoryName;
 
     // push the new category to the category array (which we will also pass back to the calling component to save the list)
-    this.expenseCategories.push(category);
+      this.expenseCategories.push(category);
   }
 
   // called when user clicks 'create cagetory' to show the input and button to create a new category
@@ -76,7 +84,8 @@ export class NewExpenseDialogComponent implements OnInit {
 
   saveEditExpense(){
 
-     // creating the result object to pas back
+     // creating the result object to pass back
+      
       let result = {
         expenseBeingEdited: this.expenseBeingEdited,
         expenseCategories:  this.expenseCategories,

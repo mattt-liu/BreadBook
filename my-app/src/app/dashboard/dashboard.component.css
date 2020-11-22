@@ -35,10 +35,6 @@ background-color: #a8dadc;
     border-radius: 5px;
     background-color: lightblue;
   }
-  .canvas{
-    height: 1000px;
-    width: 200%;
-  }
   .dashboard-button{
     border-radius: 10px;
     border:none;
