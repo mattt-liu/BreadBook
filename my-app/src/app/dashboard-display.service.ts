@@ -33,32 +33,32 @@ export class DashboardDisplayService {
     {
       name: "Utilities",
       amount: 133.56,
-      info: {type: "month", repeat: 1, lux: false}
+      info: {type: "month", repeat: 1, category: ""}
     },
     {
       name: "Gym membership",
       amount: 9.99,
-      info: {type: "week", repeat: 2, lux: false}
+      info: {type: "week", repeat: 2, category: ""}
     },
     {
       name: "Netflix",
       amount: 19.99,
-      info: {type: "month", repeat: 1, lux: true}
+      info: {type: "month", repeat: 1, category: ""}
     },
     {
       name: "Groceries",
       amount: 63.89,
-      info: {type: "other", repeat: 0, lux: false}
+      info: {type: "other", repeat: 0, category: ""}
     },
     {
       name: "Taco Bell",
       amount: 57.12,
-      info: {type: "other", repeat: 0, lux: true}
+      info: {type: "other", repeat: 0, category: ""}
     },
     {
       name: "Uber",
       amount: 12.43,
-      info: {type: "other", repeat: 0, lux: true}
+      info: {type: "other", repeat: 0, category: ""}
     }
   ];
 
@@ -69,10 +69,15 @@ export class DashboardDisplayService {
 
   // expenses
   getExpenses(): Expense[] {
+    // get all expenses
+
     return this.expensesData;
   }
 
   getExpensesType(type: string): Expense[] {
+
+    // get expenses of chrnological type
+
     // get the index of the repeat type
     let index = this.types.length-1;
     for (let i = 0; i < this.types.length; i ++) {
@@ -103,7 +108,15 @@ export class DashboardDisplayService {
     }
     return out;
   }
+
+  // income
+  getIncome(): Income[] {
+    // return all income
+    return this.incomeData;
+  }
   getIncomeType(type: string): Income[] {
+    // get income of specific chronological type
+
     // get the index of the repeat type
     let index = this.types.length-1;
     for (let i = 0; i < this.types.length; i ++) {
@@ -135,177 +148,18 @@ export class DashboardDisplayService {
     return out;
   }
 
-  // income
-  getIncome(): Income[] {
-    return this.incomeData;
-  }
-
-  getIncomeDay(): Income[] {
-    
-    let out: Income[] = [];
-
-    for (let e of this.incomeData) {
-
-      let expenseAmount = 0;
-      // find the chronological type and divide by weekly 
-      let type = e.info.type
-      switch(type) {
-        case "year":
-          expenseAmount = e.amount/365;
-          break;
-        case "month":
-          expenseAmount = e.amount/30;
-          break;
-        case "week":
-          expenseAmount = e.amount/7;
-          break;
-        default:
-          expenseAmount = e.amount;
-          break;
-      }
-
-      // create new Expense and push it
-      let x: Income = {
-        name: e.name,
-        amount: expenseAmount,
-        info: {
-          type: "day",
-          repeat: e.info.repeat
-        }
-      };
-
-      // push
-      out.push(x);
-    }
-    return out;
-  }
-  getIncomeWeek(): Income[] {
-    let out: Income[] = [];
-
-    for (let e of this.incomeData) {
-
-      let expenseAmount = 0;
-      // find the chronological type and divide by weekly 
-      let type = e.info.type
-      switch(type) {
-        case "year":
-          expenseAmount = e.amount/52;
-          break;
-        case "month":
-          expenseAmount = e.amount/4;
-          break;
-        case "day":
-          expenseAmount = e.amount*7;
-          break;
-        default:
-          expenseAmount = e.amount;
-          break;
-      }
-
-      // create new Expense and push it
-      let x: Income = {
-        name: e.name,
-        amount: expenseAmount,
-        info: {
-          type: "week",
-          repeat: e.info.repeat
-        }
-      };
-
-      // push
-      out.push(x);
-    }
-
-    return out;
-  }
-  getIncomeMonth(): Income[] {
-    
-    let out: Income[] = [];
-
-    for (let e of this.incomeData) {
-
-      let expenseAmount = 0;
-      // find the chronological type and divide by weekly 
-      let type = e.info.type
-      switch(type) {
-        case "year":
-          expenseAmount = e.amount/12;
-          break;
-        case "week":
-          expenseAmount = e.amount*4;
-          break;
-        case "day":
-          expenseAmount = e.amount*30;
-          break;
-        default:
-          expenseAmount = e.amount;
-          break;
-      }
-
-      // create new Expense and push it
-      let x: Income = {
-        name: e.name,
-        amount: expenseAmount,
-        info: {
-          type: "month",
-          repeat: e.info.repeat
-        }
-      };
-
-      // push
-      out.push(x);
-    }
-    return out;
-  }
-  getIncomeYear(): Income[] {
-    
-    let out: Income[] = [];
-
-    for (let e of this.incomeData) {
-
-      let expenseAmount = 0;
-      // find the chronological type and divide by weekly 
-      let type = e.info.type
-      switch(type) {
-        case "month":
-          expenseAmount = e.amount*12;
-          break;
-        case "week":
-          expenseAmount = e.amount*52;
-          break;
-        case "day":
-          expenseAmount = e.amount*365;
-          break;
-        default:
-          expenseAmount = e.amount;
-          break;
-      }
-
-      // create new Expense and push it
-      let x: Income = {
-        name: e.name,
-        amount: expenseAmount,
-        info: {
-          type: "year",
-          repeat: e.info.repeat
-        }
-      };
-
-      // push
-      out.push(x);
-    }
-    return out;
-  }
-
-
   // update
-  updateIncome(data: Income[]) {
-    this.incomeData = data;
+  updateIncome(data) {
+    this.incomeData.concat(data);
   }
 
-  updateExpenses(data: Expense[]) {
-    this.expensesData = data;
+  updateExpenses(data) {
+    this.expensesData.concat(data);
   }
+
+  
+
+  // 
 
   getTypes() {
     return this.types;

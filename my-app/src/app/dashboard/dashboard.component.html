@@ -6,7 +6,7 @@
 <div *ngIf="showExpensesView">
   <div class = "chart">
     <h2>My Expenses</h2>
-      <canvas baseChart 
+      <canvas style="Radius: 900; text-align: center" baseChart  
         [data] = "pieChartData"
         [labels] = "pieChartLabels"
         [chartType] = "pieChartType"
@@ -14,18 +14,21 @@
         [plugins] = "pieChartPlugins"
         [colors] = "pieChartColors"
         [legend] = "pieChartLegend"
-      > </canvas>
+      >
+      </canvas>
   </div>
+  <div style="width: 100%; text-align: center"> 
   <button class = "dashboard-button" (click)="showExpenses('day')">Day</button>
   <button class = "dashboard-button" (click)="showExpenses('week')">Week</button>
   <button class = "dashboard-button" (click)="showExpenses('month')">Month</button>
   <button class = "dashboard-button" (click)="showExpenses('year')">Year</button>
+  </div>
 </div>
 
 <div *ngIf="showIncomeView">
   <div class = "chart">
     <h2>My Income</h2>
-      <canvas baseChart 
+      <canvas baseChart
         [data] = "pieChartData"
         [labels] = "pieChartLabels"
         [chartType] = "pieChartType"
@@ -35,10 +38,12 @@
         [legend] = "pieChartLegend"
       > </canvas>
   </div>
-  <button class = "dashboard-button" (click)="showIncome('day')">Day</button>
-  <button class = "dashboard-button" (click)="showIncome('week')">Week</button>
-  <button class = "dashboard-button" (click)="showIncome('month')">Month</button>
-  <button class = "dashboard-button" (click)="showIncome('year')">Year</button>
+    <div style="width: 100%; text-align: center"> 
+        <button class = "dashboard-button" (click)="showIncome('day')">Day</button>
+        <button class = "dashboard-button" (click)="showIncome('week')">Week</button>
+        <button class = "dashboard-button" (click)="showIncome('month')">Month</button>
+        <button class = "dashboard-button" (click)="showIncome('year')">Year</button>
+    </div>
 </div>
 
  

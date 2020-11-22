@@ -6,7 +6,7 @@ import { Income } from '../income';
 import { Expense } from '../expense';
 
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { ChartType, ChartOptions } from 'chart.js';
+import { Chart, ChartType, ChartOptions } from 'chart.js';
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 
 
@@ -24,32 +24,60 @@ import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/u
     showExpensesView: boolean = true;
 
     //chart drawing
-  public pieChartOptions: ChartOptions = {
-      responsive: true,
-      legend: {
-          position: 'top',
-      },
-      plugins: {
-          datalabels: {
-              formatter:(value, ctx) => {
-                  const label = ctx.chart.data.labels[ctx.dataIndex];
-                  return label;
-              },
+    public pieChartOptions: ChartOptions = {
+        responsive: true,
+        legend: {
+            position: 'top',
+        },
+        plugins: {
+            datalabels: {
+                formatter:(value, ctx) => {
+                    const label = ctx.chart.data.labels[ctx.dataIndex];
+                    return label;
+                },
+            },
+        },
+    };
+    public pieChartLabels: Label [] = [];
+    public pieChartData: number [] = [];
+    public pieChartType: ChartType = 'pie';
+    public pieChartLegend = true;
+    public pieChartPlugins = [pluginDataLabels];
+    public pieChartColors = [
+    {
+        backgroundColor: ['rgba(0,255,0,0.3)','rgba(0,0,255,0.3)','rgba(255,0,0,0.3)']
+    },
+    ];
+
+    // test chart
+    chart2 = new Chart('hat', {
+        type: 'line',
+          data: {
+            labels: this.pieChartLabels,
+            datasets: [
+              { 
+                data: this.pieChartData,
+                borderColor: "#3cba9f",
+                fill: false
+              }
+            ]
           },
-      },
-  };
-  
-  
-  public pieChartLabels: Label [] = [];
-  public pieChartData: number [] = [];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [pluginDataLabels];
-  public pieChartColors = [
-  {
-      backgroundColor: ['rgba(0,255,0,0.3)','rgba(0,0,255,0.3)','rgba(255,0,0,0.3)']
-  },
-  ];
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                display: true
+              }],
+              yAxes: [{
+                display: true
+              }],
+            }
+          }
+    });
+
+    
     constructor(
         private dashboardService: DashboardDisplayService
     ) { }
@@ -58,6 +86,7 @@ import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/u
         //this.showIncome("day");
         //this.showExpenses("day");
         this.update();
+        this.showExpenses("day");
     }
   
     //getting the layout for the income and expense**

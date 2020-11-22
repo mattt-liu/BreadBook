@@ -32,12 +32,28 @@ background-color: #a8dadc;
     box-shadow: 1px 1px #5c4733;
   }
   .chart{
-    border-radius: 25px;
+    border-radius: 5px;
+    background-color: lightblue;
+  }
+  .canvas{
+    height: 1000px;
+    width: 200%;
   }
   .dashboard-button{
     border-radius: 10px;
     border:none;
-    background-color: #A3BCF9;
+    background-color: #a3bcf9;
     color:white;
     margin: 2px;
+    outline:none;
+  }
+  .dashboard-button:active{
+    background-color: #497dff ;
+  }
+  .top_button{
+    font-size: 20px;
+    padding: 7px;
+  }
+  .h2{
+    text-align: middle;
   }

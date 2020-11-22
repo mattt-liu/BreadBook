@@ -2,16 +2,17 @@
 <p>Income and Expenses Component!</p>
 
 
-<button (click)="newExpense()" >New Expense</button>
-<button (click)="newIncome()">New Income</button>
+<button (click)="newExpense(false)" >New Expense</button>
+
+<!-- If creating income we just call the same method but pass in parameter true to specify it is an income-->
+<button (click)="newExpense(true)">New Income</button>
 
 <!-- todo: total monthly expenses -->
 <!-- todo: total monthly income -->
 <!-- todo: sort expenses by category -->
 
-<!-- Left Table Column: Expenses -->
-<h2>Expenses </h2>
 <h2>Balance {{ balance }}</h2>
+<h2>Expenses and Incomes </h2>
 
 <table class="expenseTable">
 
@@ -39,18 +40,4 @@
             <button *ngIf="showDeletePrompt" (click)="deleteExpense(expense.name)">Delete</button></td> 
     </tr>
 
-</table>
-
-
-<!-- Right Table Column: Income -->
-<table>
-
-    <!-- Header Row (Labels) -->
-    <!--<tr>
-        <td *ngFor="let column of columnHeaders">
-            {{ column }}
-        </td>
-    </tr>-->
-
-   
 </table>

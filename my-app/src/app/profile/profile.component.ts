@@ -52,12 +52,12 @@ export class ProfileComponent implements OnInit {
   saveExpenses() {
     console.log(this.expenses);
 
-    this.dashService.updateExpenses(this.expenses);
+    //this.dashService.updateExpenses(this.expenses);
   }
   saveIncome() {
     console.log(this.incomes);
 
-    this.dashService.updateIncome(this.incomes);
+    //this.dashService.updateIncome(this.incomes);
   }
 
   getTypes() {
