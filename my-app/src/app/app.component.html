@@ -1,12 +1,21 @@
-
-<ul style="width:100%">
-  <li><a routerLink="">Dashboard</a></li>
-  <li><a routerLink="/expenses-and-income">Expenses</a></li>
-  <li><a routerLink="/profile">Profile</a></li>
-</ul>
+<nav>
+        <ul style="width:100%">
+                <li><a routerLink="">Dashboard</a></li>
+                <li><a routerLink="/expenses-and-income">Expenses</a></li>
+        </ul>
+</nav>
 
 <div class="background">
         <div class="wrapper">
                 <router-outlet></router-outlet>
+                <div class="bottom">
+                        <h3>Designed and built by</h3>
+                        <ul>
+                                <li>Marcus Del Vecchio</li>
+                                <li>Stephen Idugboe</li>
+                                <li>Jared Jasinski</li>
+                                <li>Matthew Liu</li>
+                        </ul>
+                </div>
         </div>
 </div>

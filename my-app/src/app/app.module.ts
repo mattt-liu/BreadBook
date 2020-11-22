@@ -6,11 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSlideToggleModule /*, MatSlideToggle*/ } from '@angular/material/slide-toggle';
 
 import { Injectable } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 // components
 
@@ -38,7 +39,8 @@ import { LuxurySpendingComponent } from './luxury-spending/luxury-spending.compo
     AppRoutingModule,
     BrowserModule,
     ChartsModule,
-    
+    MatSlideToggleModule,
+    //MatSlideToggle,
     BrowserAnimationsModule,
     MatDialogModule,
     HttpClientModule

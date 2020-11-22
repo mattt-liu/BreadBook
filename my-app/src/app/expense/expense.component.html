@@ -1,10 +1,9 @@
-<h2>Balance {{ balance }}</h2>
-<h2>Expenses and Incomes </h2>
+<h1>Expenses and Incomes </h1>
 
-<button  class = "expense_button top_button" (click)="newExpense(false)" >New Expense</button>
+<button class = "expense_button top_button" (click)="newExpense(false)" >New Expense</button>
 
 <!-- If creating income we just call the same method but pass in parameter true to specify it is an income-->
-<button class = "expense_button " (click)="newExpense(true)">New Income</button>
+<button class = "expense_button top_button " (click)="newExpense(true)">New Income</button>
 
 <!-- todo: total monthly expenses -->
 <!-- todo: total monthly income -->
@@ -50,9 +49,3 @@
         <!-- Buttons at end of each expense row -->
         <td><button class = "expense_button" (click)="editExpense(expense.name, false)">Edit</button>
             <button class = "expense_button" (click)="promptDeleteExpense(expense.name)">Delete</button>
-            <div *ngIf="showDeletePrompt && expense.name == expenseBeingDeleted"> Are you sure?</div> 
-            <button class = "expense_button" *ngIf="showDeletePrompt && expense.name == expenseBeingDeleted" (click)="deleteExpense(expense.name)">Delete</button>
-        </td> 
-    </tr>
-
-</table>

@@ -1,7 +1,9 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 h1 {
   padding-top: 25px;
   text-align: center;
-  color: white;
+  color: black;
 }
 .section {
   text-align: center;

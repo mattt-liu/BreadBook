@@ -1,33 +1,52 @@
-.background{
-    background-color:#3D5A80;
-    height: 100%;
-  }
-.wrapper
-{
+.background {
+  position: relative;
+  background-color: #3D5A80;
+  height: auto;
+}
+
+.wrapper {
+  position: relative;
   margin: 0 auto;
   width: 80%;
-  height: 100%;
 }
-  
-  ul {
-     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(43, 43, 51);
-    }
-    li {
-      display: inline;
-      float: left;
-    }
-    
-    li a {
-    display: block;
-    padding: 8px;
-    background-color: rgb(43, 43, 51);
-    padding: 15px;
-    color: white;
-  }
-  li a:active{
-background-color: #3D5A80;
-  }
+
+nav>ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(43, 43, 51);
+}
+
+nav>ul>li {
+  display: inline;
+  float: left;
+}
+
+nav>ul>li a {
+  display: block;
+  padding: 8px;
+  background-color: rgb(43, 43, 51);
+  padding: 15px;
+  color: white;
+}
+
+nav>ul>li a:active {
+  background-color: #3D5A80;
+}
+
+.bottom {
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  position: relative;
+  bottom: 5px;
+}
+
+.bottom>ul {
+  padding: 0;
+  list-style-type: none;
+}

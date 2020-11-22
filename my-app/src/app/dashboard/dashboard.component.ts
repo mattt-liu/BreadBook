@@ -119,6 +119,7 @@ export class DashboardComponent implements OnInit {
 
     this.pieChartLabels = [];
     this.pieChartData = [];
+    console.log("clear");
 
     //push values of name and amount graph
     for (let e of this.dashboardService.getExpensesType(type)) {

@@ -32,6 +32,11 @@ export class DashboardDisplayService {
       info: {type: "weekly", repeat: 1, category: "Secondary"}
     },
     {
+      name: "Investing",
+      amount: 725.54,
+      info: {type: "monthly", repeat: 1, category: "Other"}
+    },
+    {
       name: "Yard sale",
       amount: 100.00,
       info: { type: "other", repeat: 0, category: "Other" }
@@ -67,11 +72,17 @@ export class DashboardDisplayService {
       name: "Uber",
       amount: 12.43,
       info: {type: "other", repeat: 0, category: "Transportation"}
+    },
+    {
+      name: "Vacation",
+      amount: 1100.00,
+      info: {type: "yearly", repeat: 1, category: "Entertainment"}
     }
   ];
 
+
   types: string[] = ["yearly", "monthly", "weekly","daily","other"];
-  typesVal: number[] = [365, 30, 7, 1];
+  typesVal: number[] = [365, 30, 7, 1, 0];
   incomeCategories = ["Primary","Secondary","Other"];
   expenseCategories = ["Bills", "Groceries", "Shopping", "Entertainment", "Dining Out"];
 
@@ -120,7 +131,15 @@ export class DashboardDisplayService {
 
       // if the current expense >= selected expnse type add to output
       if (temp >= index) {
-        out.push(e);
+        // converted values
+        let converted = this.getSumType(e,this.types[index]);
+        let newE: Expense = {
+          name: e.name,
+          amount: converted.amount,
+          info: e.info
+        };
+
+        out.push(newE);
       }
     }
     return out;
@@ -158,7 +177,15 @@ export class DashboardDisplayService {
       }
 
       if (temp >= index) {
-        out.push(e);
+        // converted values
+        let converted = this.getSumType(e,this.types[index]);
+        let newE: Expense = {
+          name: e.name,
+          amount: converted.amount,
+          info: e.info
+        };
+
+        out.push(newE);
       }
       
     }
@@ -250,7 +277,33 @@ export class DashboardDisplayService {
     }
   }
 
+  getSumType(e: Expense, type: string): Expense {
+
+    if (e.info.type === "other")
+      return e;
+
+    if (e.info.repeat <= 0)
+      return e;
+
+    // convert the sum to the chronological type
+    let sum = 0;
+
+    // convert from this type
+    let i = this.types.indexOf(e.info.type, 0);
+    // to this tyjpe
+    let j = this.types.indexOf(type, 0);
+
+    sum = e.amount * ((this.typesVal[j]/e.info.repeat)/this.typesVal[i]);
+    sum = Math.round(sum * 100) / 100
+
+    return {
+      name: e.name,
+      amount: sum
+    }
+  }
+
   // ----------------------
+
 
   getTypes() {
     return this.types;
