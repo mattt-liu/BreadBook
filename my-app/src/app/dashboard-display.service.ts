@@ -24,69 +24,72 @@ export class DashboardDisplayService {
     {
       name: "Work",
       amount: 53284.38,
-      info: {type: "year", repeat: 1}
+      info: {type: "yearly", repeat: 1, category: "Primary"}
     },
     {
       name: "Business",
       amount: 230.93,
-      info: {type: "week", repeat: 1}
+      info: {type: "weekly", repeat: 1, category: "Secondary"}
     },
     {
       name: "Yard sale",
       amount: 100.00,
-      info: { type: "other", repeat: 0 }
+      info: { type: "other", repeat: 0, category: "Other" }
     }
   ];
-  
   private expensesData: Expense[] = [
     {
       name: "Utilities",
       amount: 133.56,
-      info: {type: "month", repeat: 1, category: ""}
+      info: {type: "monthly", repeat: 1, category: "Bills"}
     },
     {
-      name: "Gym membership",
+      name: "Fit-4-Less",
       amount: 9.99,
-      info: {type: "week", repeat: 2, category: ""}
+      info: {type: "weekly", repeat: 2, category: "Entertainment"}
     },
     {
       name: "Netflix",
       amount: 19.99,
-      info: {type: "month", repeat: 1, category: ""}
+      info: {type: "monthly", repeat: 1, category: "Entertainment"}
     },
     {
-      name: "Groceries",
+      name: "Metro",
       amount: 63.89,
-      info: {type: "other", repeat: 0, category: ""}
+      info: {type: "other", repeat: 0, category: "Groceries"}
     },
     {
       name: "Taco Bell",
       amount: 57.12,
-      info: {type: "other", repeat: 0, category: ""}
+      info: {type: "other", repeat: 0, category: "Dining Out"}
     },
     {
       name: "Uber",
       amount: 12.43,
-      info: {type: "other", repeat: 0, category: ""}
+      info: {type: "other", repeat: 0, category: "Transportation"}
     }
   ];
 
-  types: string[] = ["year", "month", "week","day","other"];
+  types: string[] = ["yearly", "monthly", "weekly","daily","other"];
   typesVal: number[] = [365, 30, 7, 1];
+  incomeCategories = ["Primary","Secondary","Other"];
+  expenseCategories = ["Bills", "Groceries", "Shopping", "Entertainment", "Dining Out"];
 
   constructor(private http: HttpClient) { }
-
-  // expenses
-  getHttpExpenses() {
-    
+  
+  //categories
+  getExpenseCategories(): string[] {
+    return this.expenseCategories;
   }
-
+  getIncomeCategories(): string[] {
+    return this.incomeCategories;
+  }
+  // expenses
   getExpenses(): Expense[] {
     // get all expenses
 
     return this.expensesData;
   }
-
   getExpensesType(type: string): Expense[] {
 
     // get expenses of chrnological type
@@ -94,7 +97,7 @@ export class DashboardDisplayService {
     // get the index of the repeat type
     let index = this.types.length-1;
     for (let i = 0; i < this.types.length; i ++) {
-      if (type === this.types[i]) {
+      if (type.toLowerCase() === this.types[i]) {
         index = i;
         break;
       }
@@ -105,19 +108,20 @@ export class DashboardDisplayService {
     let out: Expense[] = [];
 
     for (let e of this.expensesData) {
-      // get index of 'e.info.type';
+      // get index of every expense 'e.info.type';
       let temp = this.types.length-1;
       for (let i = 0; i < this.types.length; i ++) {
-        if (e.info.type === this.types[i]) {
+        // check if it precedes the selected type
+        if (e.info.type.toLowerCase() === this.types[i]) {
           temp = i;
           break;
         }
       }
 
+      // if the current expense >= selected expnse type add to output
       if (temp >= index) {
         out.push(e);
       }
-      
     }
     return out;
   }
@@ -133,7 +137,7 @@ export class DashboardDisplayService {
     // get the index of the repeat type
     let index = this.types.length-1;
     for (let i = 0; i < this.types.length; i ++) {
-      if (type === this.types[i]) {
+      if (type.toLowerCase() === this.types[i].toLowerCase()) {
         index = i;
         break;
       }
@@ -147,7 +151,7 @@ export class DashboardDisplayService {
       // get index of 'e.info.type';
       let temp = this.types.length-1;
       for (let i = 0; i < this.types.length; i ++) {
-        if (e.info.type === this.types[i]) {
+        if (e.info.type.toLowerCase() === this.types[i].toLowerCase()) {
           temp = i;
           break;
         }
@@ -191,7 +195,6 @@ export class DashboardDisplayService {
 
     this.incomeData.concat(data);
   }
-
   updateExpenses(data: Expense[]) {
 
     for (let i = 0; i < data.length; i ++) {

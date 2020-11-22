@@ -2,11 +2,11 @@
   {
     "name": "Work",
     "amount": "36284.38",
-    "info": {"type": "year", "repeat": "1"}
+    "info": {"type": "year", "repeat": "1", "category": "Primary Income"}
   },
   {
     "name": "Business",
     "amount": "230.93",
-    "info": {"type": "week", "repeat": "1"}
+    "info": {"type": "week", "repeat": "1", "category": "Alternative income"}
   }
 ]

@@ -7,26 +7,26 @@
     {
       "name": "Gym membership",
       "amount": 9.99,
-      "info": {"type": "week", "repeat": 2, "category": ""}
+      "info": {"type": "week", "repeat": 2, "category": "subscriptions"}
     },
     {
       "name": "Netflix",
       "amount": 19.99,
-      "info": {"type": "month", "repeat": 1, "category": ""}
+      "info": {"type": "month", "repeat": 1, "category": "subscriptions"}
     },
     {
       "name": "Groceries",
       "amount": 63.89,
-      "info": {"type": "other", "repeat": 0, "category": ""}
+      "info": {"type": "other", "repeat": 0, "category": "groceries"}
     },
     {
       "name": "Taco Bell",
       "amount": 57.12,
-      "info": {"type": "other", "repeat": 0, "category": ""}
+      "info": {"type": "other", "repeat": 0, "category": "dining out"}
     },
     {
       "name": "Uber",
       "amount": 12.43,
-      "info": {"type": "other", "repeat": 0, "category": ""}
+      "info": {"type": "other", "repeat": 0, "category": "transportation"}
     }
 ];

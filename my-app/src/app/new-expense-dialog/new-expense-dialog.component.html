@@ -16,17 +16,17 @@
     <div>
       Repeats
       <select [(ngModel)]="expenseBeingEdited.info.type">
-        <option>Never</option>
-        <option>Daily</option>
-        <option>Weekly</option>
-        <option>Monthly</option>
-        <option>Yearly</option>
+        <option>other</option>
+        <option>daily</option>
+        <option>weekly</option>
+        <option>monthly</option>
+        <option>yearly</option>
       </select>
     </div>
 
     <div>
       Category
-      <select [(ngModel)]="expenseBeingEdited.category">
+      <select [(ngModel)]="expenseBeingEdited.info.category">
         <option *ngFor="let category of expenseCategories ">{{ category }}</option>
       </select>
       <button (click)="showCreateExpenseCategorySection()">New {{ incomeOrExpense }} Category</button>
@@ -53,17 +53,17 @@
     <div>
       Repeats
       <select id="editExpenseRepeats" [(ngModel)]="expenseBeingEdited.info.type">
-        <option>Never</option>
-        <option>Daily</option>
-        <option>Weekly</option>
-        <option>Monthly</option>
-        <option>Yearly</option>
+        <option>other</option>
+        <option>daily</option>
+        <option>weekly</option>
+        <option>monthly</option>
+        <option>yearly</option>
       </select>
     </div>
 
     <div>
       Category
-      <select [(ngModel)]="expenseBeingEdited.info.category" id="editExpeneCategory">
+      <select [(ngModel)]="expenseBeingEdited.info.category" id="editExpenceCategory">
         <option *ngFor="let category of expenseCategories ">{{ category }}</option>
       </select>
       <button (click)="showCreateExpenseCategorySection()">New {{ incomeOrExpense }} Category</button>

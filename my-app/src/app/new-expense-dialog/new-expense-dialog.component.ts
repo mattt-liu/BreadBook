@@ -58,6 +58,7 @@ export class NewExpenseDialogComponent implements OnInit {
 
     // if an expense is being edited (one is passed in) set the expene member object to the passed in object
       if(data.expenseBeingEdited){
+        console.log(data.expenseBeingEdited);
         this.expenseBeingEdited = data.expenseBeingEdited; 
       }
 

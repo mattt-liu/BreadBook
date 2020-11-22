@@ -39,7 +39,9 @@ export class ExpenseComponent implements OnInit {
     private dashService: DashboardDisplayService
     ) { 
     this.balance = 100.0;
-    this.expenseCategories = ["Bills", "Groceries", "Shopping", "Entertainment", "Dining Out"];
+
+    // todo get caegories
+    this.expenseCategories = ["Bills", "Groceries", "Shopping", "Entertainment", "Dining Out"]; 
     this.incomeCategories = ["Work", "Tax Returns", "Money Transfers"];
   }
 
@@ -122,11 +124,12 @@ export class ExpenseComponent implements OnInit {
     if(isIncome){
 
         // find income in income array with matching name 
-        for(let inc of this.incomes){
-          if(inc.name == expenseName){
-            expense = inc;
+
+          for(let inc of this.incomes){
+            if(inc.name == expenseName){
+              expense = inc;
+            }
           }
-        }
     }else{
 
       // find expense in expense array with matching name 
@@ -161,7 +164,7 @@ export class ExpenseComponent implements OnInit {
       dialogConfig.data = {
         enableNewExpense: false,
         enableEditExpense: true,
-        expenseBeingEdited: expense, // could also be an income object (if isIncome is true)
+        expenseBeingEdited: expense, //could also be an income object (if isIncome is true)
         expenseCategories: categories,
       } 
 
@@ -171,61 +174,76 @@ export class ExpenseComponent implements OnInit {
     // callback for data recieved from dialog after closing. It will pass the edited expense object and the (potentially edited) categories list
       
       dialogRef.afterClosed().subscribe(result => {
-
-        /* TODO IMPLIMENT THIS FOR EDIT (SEE CREATE)
-        if(result){ // if they don't close the window (this result object property will be defined)
-          // calling method to create the new income or expense (based on passed in parameter to this method)
-          this.addExpenseOrIncome(result, isIncome);
-        }
-        else{
-          console.log("Add income/expense window closed");
-        }
-        
-        // update service
-        this.dashService.updateExpenses(result);   
-        */
-       
-        this.changedExpenseResult = result.expenseBeingEdited;
-        this.expenseCategories = result.expenseCategories;
-        this.saveEditExpense(result, expense.name);
+        this.saveEditExpense(result, expense.name, isIncome);
         console.log(result);
       });
   }
 
-  saveEditExpense(result: any, expenseName: string){
+  saveEditExpense(result: any, expenseName: string, isIncome: boolean){
     let editedExpense = result.expenseBeingEdited;
-    this.expenseCategories = result.expenseCategories;
 
-    for(let expense of this.expenses){
-      if(expense.name == expenseName){
-        expense.name = editedExpense.name;
-        expense.amount = editedExpense.amount;
-        expense.info.category = editedExpense.info.category;
-        expense.info.type = editedExpense.info.type;
-        expense.info.repeat = editedExpense.info.repeat
-      }
+      if(!isIncome){
+        this.expenseCategories = result.expenseCategories;
+        
+        // update the expense object (within the 'expenses' array)
+        for(let expense of this.expenses){
+          if(expense.name == expenseName){
+          expense.name = editedExpense.name;
+          expense.amount = editedExpense.amount;
+          expense.info.category = editedExpense.info.category;
+          expense.info.type = editedExpense.info.type;
+          expense.info.repeat = editedExpense.info.repeat
+        }
     }
+      }
+    
+    // if the expense being added is income
+      else{
+        this.incomeCategories = result.expenseCategories;
+        for(let income of this.incomes){
+          if(income.name == expenseName){
+            income.name = editedExpense.name;
+            income.amount = editedExpense.amount;
+            income.info.category = editedExpense.info.category;
+            income.info.type = editedExpense.info.type;
+            income.info.repeat = editedExpense.info.repeat
+          } 
+        }
+      }    
   }
 
   promptDeleteExpense(expenseName: string){
     this.showDeletePrompt = true;
     this.expenseBeingDeleted = expenseName;
+    
     // todo impliment setTimeout functionality so that delete prompt disappears after certain time?
-    //setTimeout(10000);
-    //this.showDeletePrompt = false;
+      //setTimeout(10000);
+      //this.showDeletePrompt = false;
   }
 
   deleteExpense(expense: string){
     this.showDeletePrompt = false;
 
     // tell service to delete expense
-    this.dashService.deleteExpense(expense);
-    this.update();
+      this.dashService.deleteExpense(expense);
+      this.update();
   }
+
+  deleteIncome(income: string){
+    this.showDeletePrompt = false;
+
+    // tell service to delete expense
+      this.dashService.deleteIncome(income);
+      this.update();
+  }
+
+
 
   update() {
     this.expenses = this.dashService.getExpenses();
     this.incomes = this.dashService.getIncome();
+    this.expenseCategories = this.dashService.getExpenseCategories();
+    this.incomeCategories = this.dashService.getIncomeCategories();
   }
 
   ngOnInit(): void {

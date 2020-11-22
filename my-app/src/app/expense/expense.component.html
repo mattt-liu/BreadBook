@@ -1,11 +1,7 @@
-
-<p>Income and Expenses Component!</p>
-
-
-<button (click)="newExpense(false)" >New Expense</button>
+<button  class = "expense_button" (click)="newExpense(false)" >New Expense</button>
 
 <!-- If creating income we just call the same method but pass in parameter true to specify it is an income-->
-<button (click)="newExpense(true)">New Income</button>
+<button class = "expense_button" (click)="newExpense(true)">New Income</button>
 
 <!-- todo: total monthly expenses -->
 <!-- todo: total monthly income -->
@@ -17,7 +13,7 @@
 <table class="expenseTable">
 
     <!-- Header Row (Labels) -->
-    <tr class="expenseTableTd" >
+    <tr class="expenseTableTd">
         <td *ngFor="let column of expenseDetails" class="expenseTableHeaderRow">
             {{ column }}
         </td>
@@ -27,31 +23,33 @@
     </tr>
 
     <!-- Income Table Rows - Always at Top -->
-    <tr *ngFor="let income of incomes" class="incomeTableTr">
+    <tr *ngFor="let income of incomes" class="incomeTableTr" (click)="editExpense(income.name, true)">
         <td>{{income.name}}</td>
         <td>{{income.amount}}</td>
         <td>{{income.info.type}}</td>
         <td>{{income.info.category}}</td>
 
         <!-- Buttons at end of each expense row -->
-        <td><button (click)="editExpense(income.name, true)">Edit</button>
-        <button (click)="promptDeleteExpense(income.name)">Delete</button>
+        <td><button class = "expense_button" (click)="editExpense(income.name, true)">Edit</button>
+        <button  class = "expense_button" (click)="promptDeleteExpense(income.name)">Delete</button>
             <div *ngIf="showDeletePrompt && income.name == expenseBeingDeleted"> Are you sure?</div> 
-            <button *ngIf="showDeletePrompt && income.name == expenseBeingDeleted" (click)="deleteExpense(income.name)">Delete</button></td> 
+            <button *ngIf="showDeletePrompt && income.name == expenseBeingDeleted" (click)="deleteIncome(income.name)">Delete</button>
+        </td> 
     </tr>
 
     <!-- Expense Data Rows -->
-    <tr *ngFor="let expense of expenses" class="expenseTableTr">
+    <tr *ngFor="let expense of expenses" class="expenseTableTr" (click)="editExpense(expense.name, false)">
         <td>{{expense.name}}</td>
         <td>{{expense.amount}}</td>
         <td>{{expense.info.type}}</td>
         <td>{{expense.info.category}}</td>
 
         <!-- Buttons at end of each expense row -->
-        <td><button (click)="editExpense(expense.name, false)">Edit</button>
-        <button (click)="promptDeleteExpense(expense.name)">Delete</button>
+        <td><button class = "expense_button" (click)="editExpense(expense.name, false)">Edit</button>
+        <button class = "expense_button" (click)="promptDeleteExpense(expense.name)">Delete</button>
             <div *ngIf="showDeletePrompt && expense.name == expenseBeingDeleted"> Are you sure?</div> 
-            <button *ngIf="showDeletePrompt && expense.name == expenseBeingDeleted" (click)="deleteExpense(expense.name)">Delete</button></td> 
+            <button class = "expense_button" *ngIf="showDeletePrompt && expense.name == expenseBeingDeleted" (click)="deleteExpense(expense.name)">Delete</button>
+        </td> 
     </tr>
 
 </table>
