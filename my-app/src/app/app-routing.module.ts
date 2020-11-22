@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { ProfileComponent } from './profile/profile.component';
+import { BrowserModule } from '@angular/platform-browser';
+
 
     
 

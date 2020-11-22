@@ -1,11 +1,12 @@
 .background{
-    background-color:#a8dadc;
+    background-color:#3D5A80;
     height: 100%;
   }
 .wrapper
 {
   margin: 0 auto;
   width: 80%;
+  height: 100%;
 }
   
   ul {
@@ -27,6 +28,6 @@
     padding: 15px;
     color: white;
   }
-  li a:hover{
-background-color: #a8dadc;
+  li a:active{
+background-color: #3D5A80;
   }

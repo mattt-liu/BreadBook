@@ -1,8 +1,9 @@
-<h1 id="dashboard" class="dashboard">My Dashboard</h1>
+<h1 id="dashboard" class="dashboard">My Dashboard</h1> 
+<!--<mat-slide-toggle>Mode Switch</mat-slide-toggle> -->
 
 <h2> {{title}}</h2>
 <div class="section">
-  <div style="width: 100%; text-align: center">
+  <div style="text-align: center">
     <button class="dashboard-button top_button" (click)="clickExpensesView()">Expenses</button>
     <button class="dashboard-button top_button" (click)="clickIncomeView()">Income</button>
   </div>
@@ -13,33 +14,34 @@
         [radius]="pieChartRadius">
       </canvas>
       <div style="width: 100%; text-align: center">
-        <button class="dashboard-button" (click)="showExpenses('daily')">Day</button>
-        <button class="dashboard-button" (click)="showExpenses('weekly')">Week</button>
-        <button class="dashboard-button" (click)="showExpenses('monthly')">Month</button>
-        <button class="dashboard-button" (click)="showExpenses('yearly')">Year</button>
+        <button class="dashboard-button" (click)="showExpenses('daily')">Daily</button>
+        <button class="dashboard-button" (click)="showExpenses('weekly')">Weekly</button>
+        <button class="dashboard-button" (click)="showExpenses('monthly')">Monthly</button>
+        <button class="dashboard-button" (click)="showExpenses('yearly')">Yearly</button>
       </div>
     </div>
   </div>
 
   <div *ngIf="showIncomeView">
-    <div class="section">
+    <div>
       <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
         [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
       </canvas>
       <div style="width: 100%; text-align: center">
-        <button class="dashboard-button" (click)="showIncome('daily')">Day</button>
-        <button class="dashboard-button" (click)="showIncome('weekly')">Week</button>
-        <button class="dashboard-button" (click)="showIncome('monthly')">Month</button>
-        <button class="dashboard-button" (click)="showIncome('yearly')">Year</button>
+        <button class="dashboard-button" (click)="showIncome('daily')">Daily</button>
+        <button class="dashboard-button" (click)="showIncome('weekly')">Weekly</button>
+        <button class="dashboard-button" (click)="showIncome('monthly')">Monthly</button>
+        <button class="dashboard-button" (click)="showIncome('yearly')">Yearly</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<div>
-  <h2>Details</h2>
-  <div>
-    
-  </div>
+<h2>Details</h2>
+<div class="section">
+  <app-budget></app-budget>
 </div>
+
+
+<h2>Luxury Spending<h2>

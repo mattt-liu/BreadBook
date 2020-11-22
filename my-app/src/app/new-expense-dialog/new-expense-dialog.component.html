@@ -1,6 +1,6 @@
 
 <mat-dialog-content> 
-  <div *ngIf="enableNewExpense">
+  <div style= "text-align:right" *ngIf="enableNewExpense">
     <h2 mat-dialog-title>New {{ incomeOrExpense }}</h2>
 
     <div>
@@ -25,21 +25,22 @@
     </div>
 
     <div>
-      Category
-      <select [(ngModel)]="expenseBeingEdited.info.category">
-        <option *ngFor="let category of expenseCategories ">{{ category }}</option>
-      </select>
+ 
       <button (click)="showCreateExpenseCategorySection()">New {{ incomeOrExpense }} Category</button>
       
       <input *ngIf="enableCategorySection" type="text" [(ngModel)]="createdCategoryName">
       <button *ngIf="enableCategorySection" (click)="createExpenseCategory()">Create Category</button>
 
       <button (click)="createExpense()">Create {{ incomeOrExpense }}</button>
+      Category
+      <select [(ngModel)]="expenseBeingEdited.info.category">
+        <option *ngFor="let category of expenseCategories ">{{ category }}</option>
+      </select>
     </div>
 
   </div>
   
-  <div *ngIf="enableEditExpense">
+  <div style = "text-align: right" *ngIf="enableEditExpense">
     Edit {{ expenseBeingEdited.name }}
     
     <div>

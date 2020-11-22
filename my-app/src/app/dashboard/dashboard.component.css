@@ -1,13 +1,10 @@
 h1 {
+  padding-top: 25px;
   text-align: center;
   color: white;
 }
-
-body {
-  background-color: #a8dadc;
-}
-
 .section {
+  text-align: center;
   margin-top: 25px;
   margin-bottom: 25px;
   padding-top: 10px;
@@ -49,16 +46,19 @@ a:hover {
 
 .section {
   border-radius: 5px;
-  background-color: pink;
+  background-color: #98C1D9;
+  box-shadow: 2px 2px rgb(21, 52, 92);
 }
 
 .dashboard-button {
-  border-radius: 10px;
+  border-radius: 8px;
   border: none;
-  background-color: #a3bcf9;
-  color: white;
+  background-color: #E0FBFC;
+  color: black;
   margin: 2px;
   outline: none;
+  box-shadow: 1px 1px #3D5A80;
+
 }
 
 .dashboard-button:active {

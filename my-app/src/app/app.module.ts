@@ -4,8 +4,9 @@ import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
 
-//import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { Injectable } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { NewExpenseDialogComponent } from './new-expense-dialog/new-expense-dialog.component';
+import { BudgetComponent } from './budget/budget.component';
+import { LuxurySpendingComponent } from './luxury-spending/luxury-spending.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +28,17 @@ import { NewExpenseDialogComponent } from './new-expense-dialog/new-expense-dial
     DashboardComponent,
     ProfileComponent,
     ExpenseComponent,
-    NewExpenseDialogComponent
+    NewExpenseDialogComponent,
+    BudgetComponent,
+    LuxurySpendingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    BrowserModule,
     ChartsModule,
+    
     BrowserAnimationsModule,
     MatDialogModule,
     HttpClientModule

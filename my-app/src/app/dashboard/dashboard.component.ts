@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Label } from 'ng2-charts';
 import { DashboardDisplayService } from '../dashboard-display.service'
-
 import { Income } from '../income';
 import { Expense } from '../expense';
-
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Chart, ChartType, ChartOptions, } from 'chart.js';
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+ 
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +22,7 @@ export class DashboardComponent implements OnInit {
   showIncomeView: boolean = false;
   showExpensesView: boolean = true;
 
-  title = "My Expenses";
+  title = "Expenses";
 
   //chart drawing
   public pieChartOptions: ChartOptions = {
@@ -48,7 +47,7 @@ export class DashboardComponent implements OnInit {
   public pieChartPlugins = [pluginDataLabels];
   public pieChartColors = [
     {
-      backgroundColor: ['rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)', 'rgba(255,0,0,0.3)']
+      backgroundColor: ['rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)', 'rgba(255,0,0,0.3)', 'rgba(156, 47, 121, 1)', 'rgba(56, 165, 121, 1)','rgba(255, 165, 121, 1)','rgba(255, 80, 235, 0.81)']
     },
   ];
 
@@ -133,7 +132,7 @@ export class DashboardComponent implements OnInit {
     this.showExpensesView = false;
     this.showIncomeView = true;
 
-    this.title = "My Income";
+    this.title = "Income";
 
     this.showIncome("day");
   }
@@ -142,7 +141,7 @@ export class DashboardComponent implements OnInit {
     this.showExpensesView = true;
     this.showIncomeView = false;
 
-    this.title = "My Expenses";
+    this.title = "Expenses";
 
     this.showExpenses("day");
   }

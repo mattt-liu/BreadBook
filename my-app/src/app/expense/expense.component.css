@@ -4,7 +4,8 @@
     border-spacing: 0;
     table-layout: fixed;
     border: 1px solid black; 
-    background-color: darkgray;   
+    background-color: darkgray; 
+    box-shadow: 1px 1px rgb(37, 13, 13); 
 }
 
 .expenseTableTr{
@@ -12,32 +13,35 @@
     border: 1px solid black;
     border-collapse: collapse;    
     width: 100%;
+    padding: 2px;
 }
 
 .expenseTableTr:hover {
     animation: bounce 0.5s linear;
     border-collapse: separate;
     outline: solid 5px #FC5185;
+    
 }
 
 .incomeTableTr:hover {
     animation: bounce 0.5s linear;
     border-collapse: separate;
     outline: solid 5px #8bf0d1;
-}
+    border: 1px solid black;
 
 @keyframes bounce {
 	20% {
 		transform: translateY(-6px);
 	}
 }
-
+}
 .incomeTableTr{
     background-color: #F5DEB3;
     border: 1px solid black;
     border-collapse: collapse;    
     width: 100%;
     margin: 2px;
+    
 }
 
 
@@ -48,8 +52,16 @@
 .expense_button {
     border-radius: 10px;
     border: none;
-    background-color: #a3bcf9;
-    color: white;
+    background-color: #E0FBFC;
+    color: black;
     margin: 2px;
     outline: none;
+    box-shadow: 1px 1px;
+  }
+  .top_button {
+    font-size: 20px;
+    padding: 7px;
+  }
+  td.incomeTableTr{
+      padding:5px;
   }
