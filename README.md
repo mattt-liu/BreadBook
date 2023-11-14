@@ -4,4 +4,4 @@
 •	This project was developed using a web stack consisting of Angular.js, Node.js, and a range of diverse libraries and packages.
 •	The server's backend is powered by a REST API, running on a Node.js Express server. It effectively manages incoming requests and facilitates the seamless transmission of users' Canadian bank app profile data to the front-end for visualization purposes.
 •	The front-end component was constructed using Angular.js and supplemented by visual effects packages, such as chart.js and GreenSock GSAP.
-![image](https://github.com/mattt-liu/BreadBook/assets/71351551/5734a1e4-0c85-4436-a619-4f111ac237aa)
+
