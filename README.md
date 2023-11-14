@@ -1,5 +1,5 @@
 # BreadBook
-•	Developed this app for the purpose of empowering young adults to improve their financial literacy and management skills by contextualizing their expenses and income in daily, monthly, weekly, and yearly perspectives.
+•	Developed this Finance Management Application for the purpose of empowering young adults to improve their financial literacy and management skills by contextualizing their expenses and income in daily, monthly, weekly, and yearly perspectives.
 
 •	Offers users a visual representation of their financial data across various time intervals, employing a diverse array of chart types. This feature aids users in effective budgeting by highlighting areas where unnecessary expenditures occur.
 
